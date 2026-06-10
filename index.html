@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industria Canaima Innova 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rojo: #E5001A;
+    --rojo-oscuro: #A30013;
+    --oro: #F5C518;
+    --negro: #0A0A0A;
+    --gris-oscuro: #111111;
+    --gris-medio: #1E1E1E;
+    --gris-panel: #161616;
+    --gris-borde: #2A2A2A;
+    --blanco: #F0F0F0;
+    --blanco-suave: #BBBBBB;
+    --verde-ok: #00E676;
+    --font-titulo: 'Bebas Neue', sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
+    --font-body: 'Barlow', sans-serif;
+    --font-cond: 'Barlow Condensed', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--negro);
+    color: var(--blanco);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── GRID BACKGROUND ── */
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(229,0,26,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(229,0,26,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 64px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gris-borde);
+  }
+
+  .nav-logo {
+    font-family: var(--font-titulo);
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    color: var(--rojo);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--blanco); }
+
+  .nav-logo img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(1.1);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--blanco-suave);
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--rojo); }
+
+  .tag-año {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--oro);
+    border: 1px solid var(--oro);
+    padding: 3px 10px;
+    letter-spacing: 2px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 60px 80px;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--rojo);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-titulo {
+    font-family: var(--font-titulo);
+    font-size: clamp(5rem, 14vw, 13rem);
+    line-height: 0.88;
+    letter-spacing: -2px;
+    color: var(--blanco);
+    animation: fadeUp 0.8s 0.15s ease both;
+    position: relative;
+  }
+
+  .hero-titulo .rojo { color: var(--rojo); }
+
+  .hero-subtitulo {
+    font-family: var(--font-cond);
+    font-size: clamp(1.4rem, 3vw, 2.4rem);
+    font-weight: 700;
+    color: var(--blanco-suave);
+    margin-top: 24px;
+    letter-spacing: 2px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-desc {
+    max-width: 640px;
+    font-size: 1.05rem;
+    color: var(--blanco-suave);
+    margin-top: 28px;
+    line-height: 1.8;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    gap: 20px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.6s ease both;
+  }
+
+  .btn-primario {
+    background: var(--rojo);
+    color: #fff;
+    font-family: var(--font-cond);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 16px 40px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .btn-primario:hover { background: var(--rojo-oscuro); transform: translateY(-2px); }
+
+  .btn-secundario {
+    background: transparent;
+    color: var(--blanco);
+    font-family: var(--font-cond);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 15px 40px;
+    border: 1px solid var(--gris-borde);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-secundario:hover { border-color: var(--rojo); color: var(--rojo); }
+
+  /* Línea decorativa derecha del hero */
+  .hero-deco {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    animation: fadeUp 1s 0.7s ease both;
+  }
+
+  .hero-deco-line {
+    width: 1px;
+    height: 120px;
+    background: linear-gradient(to bottom, transparent, var(--rojo), transparent);
+  }
+
+  .hero-deco-stat {
+    text-align: center;
+  }
+
+  .hero-deco-stat .num {
+    font-family: var(--font-titulo);
+    font-size: 2.8rem;
+    color: var(--rojo);
+    display: block;
+    line-height: 1;
+  }
+
+  .hero-deco-stat .lbl {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--blanco-suave);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--blanco-suave);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: fadeUp 1s 0.9s ease both;
+  }
+
+  .hero-scroll::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--rojo);
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown-strip {
+    position: relative;
+    z-index: 1;
+    background: var(--rojo);
+    padding: 28px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+
+  .countdown-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    margin-right: 20px;
+  }
+
+  .countdown-units {
+    display: flex;
+    gap: 24px;
+  }
+
+  .cd-unit {
+    text-align: center;
+  }
+
+  .cd-unit .num {
+    font-family: var(--font-titulo);
+    font-size: 3rem;
+    line-height: 1;
+    color: #fff;
+    display: block;
+    min-width: 60px;
+  }
+
+  .cd-unit .lbl {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+  }
+
+  .cd-sep {
+    font-family: var(--font-titulo);
+    font-size: 2.5rem;
+    color: rgba(255,255,255,0.5);
+    align-self: flex-start;
+    padding-top: 4px;
+  }
+
+  /* ── SECCIONES GENÉRICAS ── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 100px 60px;
+  }
+
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--rojo);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--rojo);
+  }
+
+  .section-titulo {
+    font-family: var(--font-titulo);
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+
+  .section-desc {
+    max-width: 680px;
+    color: var(--blanco-suave);
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .area-card-img {
+    width: 100%;
+    height: 183px;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 20px;
+    border: 1px solid var(--gris-borde);
+    filter: grayscale(20%) brightness(0.85) contrast(1.05);
+    transition: filter 0.4s;
+  }
+
+  .area-card:hover .area-card-img {
+    filter: grayscale(0%) brightness(1) contrast(1.05);
+  }
+
+  /* ── ÁREAS DE INNOVACIÓN ── */
+  .areas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2px;
+    margin-top: 64px;
+  }
+
+  .area-card {
+    background: var(--gris-panel);
+    padding: 40px 36px;
+    border: 1px solid var(--gris-borde);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .area-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--rojo);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+
+  .area-card:hover { border-color: var(--rojo); transform: translateY(-4px); }
+  .area-card:hover::before { transform: scaleX(1); }
+
+  .area-icon {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .area-num {
+    position: absolute;
+    top: 24px; right: 28px;
+    font-family: var(--font-titulo);
+    font-size: 4rem;
+    color: rgba(229,0,26,0.08);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .area-titulo {
+    font-family: var(--font-cond);
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+    color: var(--blanco);
+  }
+
+  .area-desc {
+    font-size: 0.92rem;
+    color: var(--blanco-suave);
+    line-height: 1.7;
+  }
+
+  .area-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 1.5px;
+    color: var(--rojo);
+    border: 1px solid rgba(229,0,26,0.3);
+    padding: 3px 10px;
+    text-transform: uppercase;
+  }
+
+  /* ── PASOS DEL PROYECTO ── */
+  .pasos-section {
+    background: var(--gris-oscuro);
+  }
+
+  .pasos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px;
+    margin-top: 64px;
+  }
+
+  .paso-item {
+    position: relative;
+    padding: 32px 28px 28px;
+    border: 1px solid var(--gris-borde);
+    background: var(--negro);
+    transition: border-color 0.3s;
+  }
+
+  .paso-item:hover { border-color: rgba(229,0,26,0.4); }
+
+  .paso-num {
+    font-family: var(--font-titulo);
+    font-size: 3.5rem;
+    color: var(--rojo);
+    line-height: 1;
+    margin-bottom: 14px;
+    display: block;
+  }
+
+  .paso-titulo {
+    font-family: var(--font-cond);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: var(--blanco);
+  }
+
+  .paso-desc {
+    font-size: 0.88rem;
+    color: var(--blanco-suave);
+    line-height: 1.7;
+  }
+
+  .paso-conector {
+    display: none;
+  }
+
+  /* ── REGLAS ── */
+  .reglas-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 64px;
+    align-items: start;
+  }
+
+  .regla-item {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 32px;
+    align-items: flex-start;
+  }
+
+  .regla-icon {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    background: rgba(229,0,26,0.1);
+    border: 1px solid rgba(229,0,26,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+  }
+
+  .regla-texto h4 {
+    font-family: var(--font-cond);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: var(--blanco);
+  }
+
+  .regla-texto p {
+    font-size: 0.88rem;
+    color: var(--blanco-suave);
+    line-height: 1.7;
+  }
+
+  /* Panel de fecha */
+  .fecha-panel {
+    background: var(--gris-panel);
+    border: 1px solid var(--gris-borde);
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .fecha-panel::after {
+    content: '2026';
+    position: absolute;
+    bottom: -20px;
+    right: -10px;
+    font-family: var(--font-titulo);
+    font-size: 8rem;
+    color: rgba(229,0,26,0.06);
+    pointer-events: none;
+  }
+
+  .fecha-item {
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--gris-borde);
+  }
+
+  .fecha-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .fecha-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 2.5px;
+    color: var(--rojo);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .fecha-valor {
+    font-family: var(--font-cond);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--blanco);
+    letter-spacing: 1px;
+  }
+
+  .fecha-nota {
+    font-size: 0.82rem;
+    color: var(--blanco-suave);
+    margin-top: 4px;
+  }
+
+  /* ── PREMIO ── */
+  .premio-section {
+    background: var(--gris-oscuro);
+  }
+
+  .premio-banner {
+    background: linear-gradient(135deg, var(--rojo-oscuro) 0%, var(--rojo) 50%, #FF3050 100%);
+    padding: 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 64px;
+  }
+
+  .premio-banner::before {
+    content: '★';
+    position: absolute;
+    font-size: 20rem;
+    color: rgba(255,255,255,0.04);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .premio-titulo {
+    font-family: var(--font-titulo);
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .premio-desc {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.85);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  .premio-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2px;
+    margin-top: 2px;
+  }
+
+  .premio-card {
+    background: rgba(229,0,26,0.12);
+    border: 1px solid rgba(229,0,26,0.25);
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .premio-card .emoji { font-size: 2rem; display: block; margin-bottom: 12px; }
+  .premio-card .titulo {
+    font-family: var(--font-cond);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--oro);
+    margin-bottom: 8px;
+  }
+  .premio-card .detalle { font-size: 0.85rem; color: var(--blanco-suave); }
+
+  /* ── PARTICIPACIÓN (formulario futuro) ── */
+  .participacion-section {
+    text-align: center;
+    padding: 100px 60px;
+  }
+
+  .nota-formulario {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(245,197,24,0.08);
+    border: 1px solid rgba(245,197,24,0.25);
+    padding: 14px 24px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--oro);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+
+  .participa-pasos {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    margin-top: 48px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .p-paso {
+    flex: 1;
+    min-width: 180px;
+    padding: 32px 24px;
+    background: var(--gris-panel);
+    border: 1px solid var(--gris-borde);
+    position: relative;
+    text-align: left;
+  }
+
+  .p-paso:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: var(--rojo);
+    z-index: 2;
+  }
+
+  .p-paso .p-num {
+    font-family: var(--font-titulo);
+    font-size: 2rem;
+    color: var(--rojo);
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .p-paso .p-titulo {
+    font-family: var(--font-cond);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--blanco);
+  }
+
+  .p-paso .p-detalle {
+    font-size: 0.82rem;
+    color: var(--blanco-suave);
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    background: var(--negro);
+    border-top: 1px solid var(--gris-borde);
+    padding: 48px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: gap;
+    gap: 24px;
+  }
+
+  .footer-logo {
+    font-family: var(--font-titulo);
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+  }
+
+  .footer-logo span { color: var(--rojo); }
+
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--blanco-suave);
+    letter-spacing: 1.5px;
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  .footer-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--rojo);
+    letter-spacing: 2px;
+    text-align: right;
+  }
+
+  /* ── DIVISOR ── */
+  .divisor {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gris-borde), transparent);
+    margin: 0 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── ANIMACIONES ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .dot-vivo {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--verde-ok);
+    border-radius: 50%;
+    animation: pulse 1.8s infinite;
+    margin-right: 6px;
+  }
+
+  /* Scrollreveal manual */
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .hero-deco { display: none; }
+    .hero-scroll { left: 24px; }
+    section { padding: 64px 24px; }
+    .reglas-layout { grid-template-columns: 1fr; gap: 40px; }
+    .countdown-strip { padding: 20px 24px; gap: 20px; flex-direction: column; align-items: flex-start; }
+    .areas-grid { gap: 12px; }
+    .pasos-grid { gap: 16px; }
+    .participa-pasos { flex-direction: column; }
+    .p-paso:not(:last-child)::after { display: none; }
+    footer { flex-direction: column; text-align: center; padding: 40px 24px; }
+    .footer-tag { text-align: center; }
+    .participacion-section { padding: 64px 24px; }
+    .premio-banner { padding: 40px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://www.instagram.com/industriacanaima_ve/" target="_blank" class="nav-logo">
+    <img src="img/logo.png" alt="Logo Industria Canaima" width="161" height="38" style="height:38px; width:auto; object-fit:contain; filter:brightness(1.1);" onerror="this.style.display='none'; this.nextSibling.style.display='flex';">
+    <span style="display:none;">INDUSTRIA CANAIMA <span>INNOVA</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#areas">Áreas</a></li>
+    <li><a href="#estructura">Estructura</a></li>
+    <li><a href="#reglas">Reglas</a></li>
+    <li><a href="#premios">Premio</a></li>
+    <li><a href="#participar">Participar</a></li>
+  </ul>
+  <div class="tag-año">2026</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow"><span class="dot-vivo"></span> Desafío de Innovación — Industria Canaima</div>
+  <h1 class="hero-titulo">INDUSTRIA CANAIMA<br><span class="rojo">INNOVA</span><br>2026</h1>
+  <p class="hero-subtitulo">Tu idea puede cambiar lo que hacemos.</p>
+  <p class="hero-desc">
+    Un espacio para que los trabajadores de Industria Canaima propongan, desarrollen y presenten proyectos reales e innovadores. Las mejores ideas serán desarrolladas y premiadas. <strong>Todas las ideas son bienvenidas.</strong>
+  </p>
+  <div class="hero-cta-row">
+    <a href="#areas" class="btn-primario">Explorar Áreas</a>
+    <a href="#estructura" class="btn-secundario">¿Cómo Participar?</a>
+  </div>
+  <div class="hero-deco">
+    <div class="hero-deco-line"></div>
+    <div class="hero-deco-stat">
+      <span class="num">4</span>
+      <span class="lbl">Líneas<br>Producción</span>
+    </div>
+    <div class="hero-deco-line"></div>
+    <div class="hero-deco-stat">
+      <span class="num">4</span>
+      <span class="lbl">Impresoras<br>3D</span>
+    </div>
+    <div class="hero-deco-line"></div>
+    <div class="hero-deco-stat">
+      <span class="num">40</span>
+      <span class="lbl">Días para<br>Entregar</span>
+    </div>
+    <div class="hero-deco-line"></div>
+  </div>
+  <div class="hero-scroll">Desplázate para ver más</div>
+</section>
+
+<!-- COUNTDOWN -->
+<div class="countdown-strip">
+  <span class="countdown-label">⏳ Tiempo restante para entregar</span>
+  <div class="countdown-units">
+    <div class="cd-unit">
+      <span class="num" id="cd-dias">--</span>
+      <span class="lbl">Días</span>
+    </div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit">
+      <span class="num" id="cd-horas">--</span>
+      <span class="lbl">Horas</span>
+    </div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit">
+      <span class="num" id="cd-min">--</span>
+      <span class="lbl">Min</span>
+    </div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit">
+      <span class="num" id="cd-seg">--</span>
+      <span class="lbl">Seg</span>
+    </div>
+  </div>
+</div>
+
+<!-- ÁREAS DE INNOVACIÓN -->
+<section id="areas">
+  <div class="section-eyebrow">Ejes Temáticos</div>
+  <h2 class="section-titulo reveal">ÁREAS DE<br>INNOVACIÓN</h2>
+  <p class="section-desc reveal">Cuatro grandes ejes que guían las ideas de este desafío. Puedes proponer algo dentro de uno de ellos o combinarlos. Lo importante: que sea real, factible y estudiado.</p>
+
+  <div class="areas-grid">
+
+    <div class="area-card reveal">
+      <span class="area-num">01</span>
+      <img src="img/linea-ensamblaje.jpg" alt="Líneas de Producción" class="area-card-img" width="275" height="183" style="width:100%; height:183px; object-fit:cover;">
+      <span class="area-icon">🏭</span>
+      <div class="area-titulo">Líneas de Ensamblaje</div>
+      <p class="area-desc">
+        Contamos con <strong>4 líneas de producción</strong> para ensamblar equipos. ¿Qué se podría fabricar o ensamblar en ellas más allá de las canaimitas? Piensa en alianzas con otras fábricas venezolanas, productos de demanda local, electrónica de consumo, equipos educativos, o cualquier propuesta que aproveche nuestra infraestructura instalada.
+      </p>
+      <div class="area-tags">
+        <span class="tag">Manufactura</span>
+        <span class="tag">Alianzas</span>
+        <span class="tag">Ensamblaje</span>
+        <span class="tag">Nuevos productos</span>
+      </div>
+    </div>
+
+    <div class="area-card reveal">
+      <span class="area-num">02</span>
+      <img src="img/impresora-3d.jpg" alt="Impresoras 3D" class="area-card-img" width="275" height="183" style="width:100%; height:183px; object-fit:cover;">
+      <span class="area-icon">🖨️</span>
+      <div class="area-titulo">Impresión 3D</div>
+      <p class="area-desc">
+        Disponemos de <strong>4 impresoras 3D</strong> listas para ser explotadas. Propón qué piezas, componentes o productos podrían fabricarse: repuestos difíciles de conseguir, dispositivos educativos, prototipos industriales, accesorios, herramientas, etc. Identifica un nicho real donde la impresión 3D marque la diferencia.
+      </p>
+      <div class="area-tags">
+        <span class="tag">Prototipado</span>
+        <span class="tag">Repuestos</span>
+        <span class="tag">Fabricación local</span>
+        <span class="tag">I+D</span>
+      </div>
+    </div>
+
+    <div class="area-card reveal">
+      <span class="area-num">03</span>
+      <img src="img/laptop-canaima.jpg" alt="Repotenciamiento Laptops Canaima" class="area-card-img" width="284" height="177" style="width:100%; height:177px; object-fit:cover;">
+      <span class="area-icon">💻</span>
+      <div class="area-titulo">Evolución Canaima</div>
+      <p class="area-desc">
+        ¿Cómo podríamos actualizar o mejorar los modelos de laptop Canaima existentes? Propón cambios de componentes <strong>compatibles y estudiados</strong>: procesadores, RAM, almacenamiento, conectividad, pantallas. Toda propuesta debe incluir factibilidad técnica y análisis de costos básico.
+      </p>
+      <div class="area-tags">
+        <span class="tag">Hardware</span>
+        <span class="tag">Actualización</span>
+        <span class="tag">Compatibilidad</span>
+        <span class="tag">Educación</span>
+      </div>
+    </div>
+
+    <div class="area-card reveal">
+      <span class="area-num">04</span>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1024px-ChatGPT_logo.svg.png" alt="Slogan Reto" class="area-card-img" style="display:none;">
+      <div style="width:100%; height:180px; background: linear-gradient(135deg, var(--rojo-oscuro) 0%, #3a0008 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bottom:20px; border:1px solid var(--gris-borde); position:relative; overflow:hidden;">
+        <div style="position:absolute; font-family:var(--font-titulo); font-size:8rem; color:rgba(255,255,255,0.05); line-height:1; pointer-events:none;">✦</div>
+        <span style="font-family:var(--font-titulo); font-size:2.2rem; color:#fff; letter-spacing:4px; text-align:center; line-height:1.1; padding:0 20px;">CREA EL<br><span style="color:var(--oro);">SLOGAN</span></span>
+        <span style="font-family:var(--font-mono); font-size:0.62rem; color:rgba(255,255,255,0.5); letter-spacing:3px; margin-top:10px; text-transform:uppercase;">Reto Creativo</span>
+      </div>
+      <span class="area-icon">✍️</span>
+      <div class="area-titulo">Slogan de Industria Canaima</div>
+      <p class="area-desc">
+        ¿Cómo resumirías en pocas palabras lo que somos y lo que hacemos? Propón un <strong>slogan original</strong> que represente la identidad, el orgullo y la visión de Industria Canaima. Que sea memorable, auténtico y digno de decir con orgullo. <strong>¡La mejor frase gana!</strong>
+      </p>
+      <div class="area-tags">
+        <span class="tag">Creatividad</span>
+        <span class="tag">Identidad</span>
+        <span class="tag">Marca</span>
+        <span class="tag">Orgullo Canaima</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<section id="estructura" class="pasos-section">
+  <div class="section-eyebrow">Guía para participantes</div>
+  <h2 class="section-titulo reveal">CÓMO ESTRUCTURAR<br>TU PROYECTO</h2>
+  <p class="section-desc reveal">No pedimos un proyecto completo, sino una <strong>idea bien presentada y estudiada</strong>. Sigue estos pasos para darle forma a tu propuesta y que tenga más posibilidades de ser seleccionada.</p>
+
+  <div class="pasos-grid">
+
+    <div class="paso-item reveal">
+      <span class="paso-num">01</span>
+      <div class="paso-titulo">Identificación del Problema u Oportunidad</div>
+      <p class="paso-desc">¿Qué problema resuelves o qué oportunidad de mercado estás aprovechando? Sé específico. Una buena idea nace de una necesidad real.</p>
+    </div>
+
+    <div class="paso-item reveal">
+      <span class="paso-num">02</span>
+      <div class="paso-titulo">Descripción de la Idea</div>
+      <p class="paso-desc">Explica en qué consiste tu propuesta con claridad. ¿Qué se fabricaría? ¿Cómo funcionaría? ¿Quién lo usaría?</p>
+    </div>
+
+    <div class="paso-item reveal">
+      <span class="paso-num">03</span>
+      <div class="paso-titulo">Justificación y Factibilidad</div>
+      <p class="paso-desc">¿Por qué es viable? ¿Contamos con los recursos, espacios o aliados necesarios? Demuestra que la idea tiene pies en la tierra.</p>
+    </div>
+
+    <div class="paso-item reveal">
+      <span class="paso-num">04</span>
+      <div class="paso-titulo">Recursos Necesarios</div>
+      <p class="paso-desc">Lista los materiales, equipos, personas o alianzas que requeriría el proyecto. Si usas nuestras líneas o impresoras 3D, indícalo.</p>
+    </div>
+
+    <div class="paso-item reveal">
+      <span class="paso-num">05</span>
+      <div class="paso-titulo">Plan de Negocio Básico</div>
+      <p class="paso-desc">¿A quién le venderías? ¿Cuál sería el precio? ¿Hay demanda real? Un estimado básico de costos vs. ingresos potenciales suma mucho valor.</p>
+    </div>
+
+    <div class="paso-item reveal">
+      <span class="paso-num">06</span>
+      <div class="paso-titulo">Impacto Esperado</div>
+      <p class="paso-desc">¿Qué logra esta idea para la Industria Canaima? Posicionamiento, ingresos propios, alianzas estratégicas, visibilidad nacional... ¿Cómo nos hace trascender?</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- REGLAS Y FECHAS -->
+<section id="reglas">
+  <div class="section-eyebrow">Bases del desafío</div>
+  <h2 class="section-titulo reveal">REGLAS &<br>FECHAS CLAVE</h2>
+
+  <div class="reglas-layout">
+
+    <div class="reveal">
+      <div class="regla-item">
+        <div class="regla-icon">👤</div>
+        <div class="regla-texto">
+          <h4>Participación Individual o en Equipo</h4>
+          <p>Puedes participar solo, en pareja o en grupo de hasta 3 integrantes. Todos deben ser trabajadores de Industria Canaima.</p>
+        </div>
+      </div>
+      <div class="regla-item">
+        <div class="regla-icon">💡</div>
+        <div class="regla-texto">
+          <h4>Ideas Abiertas y Originales</h4>
+          <p>Cualquier idea relacionada con nuestras capacidades industriales es válida. No hay límite de creatividad, solo debe ser factible y estar mínimamente estudiada.</p>
+        </div>
+      </div>
+      <div class="regla-item">
+        <div class="regla-icon">📋</div>
+        <div class="regla-texto">
+          <h4>Formato de Entrega</h4>
+          <p>Tu propuesta puede presentarse en documento escrito, presentación o cualquier formato claro. Debe seguir los 6 pasos de estructuración indicados.</p>
+        </div>
+      </div>
+      <div class="regla-item">
+        <div class="regla-icon">🔒</div>
+        <div class="regla-texto">
+          <h4>Formulario de Registro</h4>
+          <p>Se habilitará un formulario oficial para registrar tu participación. Próximamente disponible. Por ahora, usa este período para desarrollar tu idea.</p>
+        </div>
+      </div>
+      <div class="regla-item">
+        <div class="regla-icon">⚖️</div>
+        <div class="regla-texto">
+          <h4>Evaluación</h4>
+          <p>Las ideas serán evaluadas por el equipo de Industria Canaima en función de su factibilidad, originalidad, impacto potencial y viabilidad económica.</p>
+        </div>
+      </div>
+      <div class="regla-item">
+        <div class="regla-icon">🏆</div>
+        <div class="regla-texto">
+          <h4>Idea Ganadora</h4>
+          <p>La propuesta seleccionada será desarrollada oficialmente y su autor o equipo será premiado. Solo puede haber un ganador por edición.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="fecha-panel reveal">
+      <div class="section-eyebrow" style="margin-bottom: 28px;">Calendario</div>
+      <div class="fecha-item">
+        <span class="fecha-label">Inicio del desafío</span>
+        <div class="fecha-valor">Junio 2026</div>
+        <p class="fecha-nota">Apertura oficial de Canaima Innova 2026</p>
+      </div>
+      <div class="fecha-item">
+        <span class="fecha-label">Período de desarrollo</span>
+        <div class="fecha-valor">~45 días</div>
+        <p class="fecha-nota">Tiempo para estructurar y estudiar tu idea</p>
+      </div>
+      <div class="fecha-item">
+        <span class="fecha-label">Cierre de entregas</span>
+        <div class="fecha-valor">25 de Julio 2026</div>
+        <p class="fecha-nota">Fecha límite para enviar tu propuesta</p>
+      </div>
+      <div class="fecha-item">
+        <span class="fecha-label">Anuncio del ganador</span>
+        <div class="fecha-valor">Por confirmar</div>
+        <p class="fecha-nota">Posterior a la evaluación de todas las ideas</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- PREMIOS -->
+<section id="premios" class="premio-section">
+  <div class="section-eyebrow">Lo que está en juego</div>
+  <h2 class="section-titulo reveal">EL PREMIO</h2>
+
+  <div class="premio-banner reveal">
+    <div class="premio-titulo">TU IDEA SE HACE REALIDAD</div>
+    <p class="premio-desc">La propuesta ganadora no solo recibe reconocimiento: será desarrollada oficialmente por Industria Canaima. Tu idea puede cambiar el futuro de lo que fabricamos.</p>
+  </div>
+
+  <div class="premio-cards">
+    <div class="premio-card reveal">
+      <span class="emoji">🚀</span>
+      <div class="titulo">Desarrollo Oficial</div>
+      <p class="detalle">Tu proyecto será llevado a la realidad por el equipo de Industria Canaima</p>
+    </div>
+    <div class="premio-card reveal">
+      <span class="emoji">🏅</span>
+      <div class="titulo">Reconocimiento</div>
+      <p class="detalle">El equipo o individuo ganador será premiado y reconocido públicamente</p>
+    </div>
+    <div class="premio-card reveal">
+      <span class="emoji">🌐</span>
+      <div class="titulo">Visibilidad</div>
+      <p class="detalle">Tu nombre e idea asociados a la transformación de Industria Canaima</p>
+    </div>
+    <div class="premio-card reveal">
+      <span class="emoji">💼</span>
+      <div class="titulo">Impacto Real</div>
+      <p class="detalle">Contribuyes directamente a generar ingresos y posicionar a Canaima a nivel nacional</p>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- PARTICIPAR -->
+<section id="participar" class="participacion-section">
+  <div class="section-eyebrow" style="justify-content: center;">¿Listo para participar?</div>
+  <h2 class="section-titulo reveal">ASÍ DE SIMPLE</h2>
+
+  <div class="nota-formulario reveal">
+    <span>📋</span>
+    El formulario de inscripción oficial se habilitará próximamente — usa este tiempo para desarrollar tu idea
+  </div>
+
+  <div class="participa-pasos reveal">
+    <div class="p-paso">
+      <span class="p-num">1</span>
+      <div class="p-titulo">Elige tu área</div>
+      <p class="p-detalle">Líneas de ensamblaje, impresión 3D o evolución Canaima. También puedes combinar áreas.</p>
+    </div>
+    <div class="p-paso">
+      <span class="p-num">2</span>
+      <div class="p-titulo">Forma tu equipo</div>
+      <p class="p-detalle">Puedes participar solo, en pareja o en trío de compañeros de trabajo.</p>
+    </div>
+    <div class="p-paso">
+      <span class="p-num">3</span>
+      <div class="p-titulo">Desarrolla tu idea</div>
+      <p class="p-detalle">Sigue la guía de los 6 pasos para estructurar bien tu propuesta.</p>
+    </div>
+    <div class="p-paso">
+      <span class="p-num">4</span>
+      <div class="p-titulo">Entrega y espera</div>
+      <p class="p-detalle">Envía tu propuesta antes del cierre y aguarda la evaluación del equipo Canaima.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <a href="https://www.instagram.com/industriacanaima/" target="_blank" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+      <img src="logo.png" alt="Logo Industria Canaima" width="213" height="50" style="height:44px; width:auto; object-fit:contain; filter:brightness(1.1);" onerror="this.style.display='none';">
+      <span style="font-family:var(--font-titulo); font-size:1.8rem; letter-spacing:3px; color:var(--blanco);">INDUSTRIA CANAIMA <span style="color:var(--rojo);">INNOVA</span></span>
+    </a>
+  </div>
+  <div class="footer-copy">
+    Industria Canaima · Desafío de Innovación 2026<br>
+    Construido por y para los trabajadores de Canaima
+  </div>
+  <div class="footer-tag">
+    #Industria Canaima Innova
+  </div>
+</footer>
+
+<script>
+  // ── COUNTDOWN ──
+  const deadline = new Date('2026-07-25T23:59:59');
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = deadline - now;
+    if (diff <= 0) {
+      document.getElementById('cd-dias').textContent = '00';
+      document.getElementById('cd-horas').textContent = '00';
+      document.getElementById('cd-min').textContent = '00';
+      document.getElementById('cd-seg').textContent = '00';
+      return;
+    }
+    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const min = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seg = Math.floor((diff % (1000 * 60)) / 1000);
+    document.getElementById('cd-dias').textContent = String(dias).padStart(2, '0');
+    document.getElementById('cd-horas').textContent = String(horas).padStart(2, '0');
+    document.getElementById('cd-min').textContent = String(min).padStart(2, '0');
+    document.getElementById('cd-seg').textContent = String(seg).padStart(2, '0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
